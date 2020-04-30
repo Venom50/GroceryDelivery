@@ -123,3 +123,8 @@ C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDel
 C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.csproj.CopyComplete
 C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.dll
 C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.pdb
+C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.InitialCreate.resources
+C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.csproj.GenerateResource.cache
+C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.InitialModel.resources
+C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.SeedUsers.resources
+C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.AddAddressDataToApplicationUser.resources

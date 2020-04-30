@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GroceryDelivery.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GroceryDelivery.Controllers
 {
@@ -151,7 +152,16 @@ namespace GroceryDelivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser 
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    City = model.City,
+                    PostalCode = model.PostalCode,
+                    Street = model.Street,
+                    HouseNumber = model.HouseNumber,
+                    ApartamentNumber = model.ApartamentNumber
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

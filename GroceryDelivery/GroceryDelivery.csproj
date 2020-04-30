@@ -170,12 +170,31 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004161349305_InitialCreate.cs" />
+    <Compile Include="Migrations\202004161349305_InitialCreate.Designer.cs">
+      <DependentUpon>202004161349305_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004300826095_InitialModel.cs" />
+    <Compile Include="Migrations\202004300826095_InitialModel.Designer.cs">
+      <DependentUpon>202004300826095_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004300853329_SeedUsers.cs" />
+    <Compile Include="Migrations\202004300853329_SeedUsers.Designer.cs">
+      <DependentUpon>202004300853329_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004300905150_AddAddressDataToApplicationUser.cs" />
+    <Compile Include="Migrations\202004300905150_AddAddressDataToApplicationUser.Designer.cs">
+      <DependentUpon>202004300905150_AddAddressDataToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -184,6 +203,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\nissan.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -236,6 +256,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -252,6 +273,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004161349305_InitialCreate.resx">
+      <DependentUpon>202004161349305_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004300826095_InitialModel.resx">
+      <DependentUpon>202004300826095_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004300853329_SeedUsers.resx">
+      <DependentUpon>202004300853329_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004300905150_AddAddressDataToApplicationUser.resx">
+      <DependentUpon>202004300905150_AddAddressDataToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

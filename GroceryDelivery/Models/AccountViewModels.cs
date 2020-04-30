@@ -79,6 +79,21 @@ namespace GroceryDelivery.Models
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasło i jego potwierdzenie są niezgodne.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Miasto")]
+        public string City { get; set; }
+
+        [Display(Name = "Numer pocztowy")]
+        public string PostalCode { get; set; }
+
+        [Display(Name = "Ulica")]
+        public string Street { get; set; }
+
+        [Display(Name = "Numer domu")]
+        public int? HouseNumber { get; set; }
+
+        [Display(Name = "Numer mieszkania")]
+        public int? ApartamentNumber { get; set; }
     }
 
     public class ResetPasswordViewModel
