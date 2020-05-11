@@ -156,6 +156,8 @@ namespace GroceryDelivery.Controllers
                 { 
                     UserName = model.Email, 
                     Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
                     City = model.City,
                     PostalCode = model.PostalCode,
                     Street = model.Street,

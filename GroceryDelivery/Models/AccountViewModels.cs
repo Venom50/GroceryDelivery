@@ -80,6 +80,12 @@ namespace GroceryDelivery.Models
         [Compare("Password", ErrorMessage = "Hasło i jego potwierdzenie są niezgodne.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "Imię")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Nazwisko")]
+        public string LastName { get; set; }
+
         [Display(Name = "Miasto")]
         public string City { get; set; }
 

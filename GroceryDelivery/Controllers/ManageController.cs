@@ -16,8 +16,11 @@ namespace GroceryDelivery.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private ApplicationDbContext _context;
+
         public ManageController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -52,25 +55,24 @@ namespace GroceryDelivery.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index()
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Zmieniono hasło."
-                : message == ManageMessageId.SetPasswordSuccess ? "Ustawiono hasło."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Ustawiono dostawcę uwierzytelniania dwuetapowego."
-                : message == ManageMessageId.Error ? "Wystąpił błąd."
-                : message == ManageMessageId.AddPhoneSuccess ? "Dodano numer telefonu."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Usunięto numer telefonu."
-                : "";
-
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId);
+
+            if (user == null)
+                return HttpNotFound();
+
+            var model = new RegisterViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+               FirstName = user.FirstName,
+               LastName = user.LastName,
+               City = user.City,
+               PostalCode = user.PostalCode,
+               Street = user.Street,
+               HouseNumber = user.HouseNumber,
+               ApartamentNumber = user.ApartamentNumber
             };
             return View(model);
         }
@@ -220,6 +222,63 @@ namespace GroceryDelivery.Controllers
             return View();
         }
 
+        public ActionResult Edit(string name)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.UserName == name);
+
+            if (user == null)
+                return HttpNotFound();
+
+            var model = new RegisterViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                City = user.City,
+                Street = user.Street,
+                PostalCode = user.PostalCode,
+                HouseNumber = user.HouseNumber,
+                ApartamentNumber = user.ApartamentNumber
+            };
+
+            return View("UserForm", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(ApplicationUser user)
+        {
+            if(!ModelState.IsValid)
+            {
+                var model = new RegisterViewModel
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    City = user.City,
+                    Street = user.Street,
+                    PostalCode = user.PostalCode,
+                    HouseNumber = user.HouseNumber,
+                    ApartamentNumber = user.ApartamentNumber
+                };
+
+                return View("UserForm", model);
+            }
+
+            var userId = User.Identity.GetUserId();
+            var userInDb = _context.Users.Single(u => u.Id == userId);
+
+            userInDb.FirstName = user.FirstName;
+            userInDb.LastName = user.LastName;
+            userInDb.City = user.City;
+            userInDb.Street = user.Street;
+            userInDb.PostalCode = user.PostalCode;
+            userInDb.HouseNumber = user.HouseNumber;
+            userInDb.ApartamentNumber = user.ApartamentNumber;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Manage");
+        }
+
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
@@ -328,6 +387,7 @@ namespace GroceryDelivery.Controllers
             {
                 _userManager.Dispose();
                 _userManager = null;
+                _context.Dispose();
             }
 
             base.Dispose(disposing);

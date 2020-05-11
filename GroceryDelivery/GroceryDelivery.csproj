@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +190,10 @@
     <Compile Include="Migrations\202004300905150_AddAddressDataToApplicationUser.cs" />
     <Compile Include="Migrations\202004300905150_AddAddressDataToApplicationUser.Designer.cs">
       <DependentUpon>202004300905150_AddAddressDataToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005111542430_ChangedVariablesInRegisterViewController.cs" />
+    <Compile Include="Migrations\202005111542430_ChangedVariablesInRegisterViewController.Designer.cs">
+      <DependentUpon>202005111542430_ChangedVariablesInRegisterViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -257,9 +262,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Map\Index.cshtml" />
+    <Content Include="Views\Manage\UserForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Profiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -286,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004300905150_AddAddressDataToApplicationUser.resx">
       <DependentUpon>202004300905150_AddAddressDataToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005111542430_ChangedVariablesInRegisterViewController.resx">
+      <DependentUpon>202005111542430_ChangedVariablesInRegisterViewController.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
