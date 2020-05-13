@@ -72,7 +72,8 @@ namespace GroceryDelivery.Controllers
                PostalCode = user.PostalCode,
                Street = user.Street,
                HouseNumber = user.HouseNumber,
-               ApartamentNumber = user.ApartamentNumber
+               ApartamentNumber = user.ApartamentNumber,
+               CreditCard = user.CreditCard
             };
             return View(model);
         }
@@ -243,6 +244,21 @@ namespace GroceryDelivery.Controllers
             return View("UserForm", model);
         }
 
+        public ActionResult EditPaymentMethod(string name)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.UserName == name);
+
+            if (user == null)
+                return HttpNotFound();
+
+            var model = new RegisterViewModel
+            {
+                CreditCard = user.CreditCard
+            };
+
+            return View("PaymentMethodForm", model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(ApplicationUser user)
@@ -279,6 +295,27 @@ namespace GroceryDelivery.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPaymentMethod(ApplicationUser user)
+        {
+            if(!ModelState.IsValid)
+            {
+                var model = new RegisterViewModel
+                {
+                    CreditCard = user.CreditCard
+                };
+                return View("PaymentMethodForm", model);
+            }
+            var userId = User.Identity.GetUserId();
+            var userInDb = _context.Users.Single(u => u.Id == userId);
+
+            userInDb.CreditCard = user.CreditCard;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Manage");
+        }
         //
         // POST: /Manage/ChangePassword
         [HttpPost]

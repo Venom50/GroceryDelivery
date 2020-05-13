@@ -152,9 +152,9 @@ namespace GroceryDelivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
-                { 
-                    UserName = model.Email, 
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
@@ -162,7 +162,8 @@ namespace GroceryDelivery.Controllers
                     PostalCode = model.PostalCode,
                     Street = model.Street,
                     HouseNumber = model.HouseNumber,
-                    ApartamentNumber = model.ApartamentNumber
+                    ApartamentNumber = model.ApartamentNumber,
+                    CreditCard = model.CreditCard
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

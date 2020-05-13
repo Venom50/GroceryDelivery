@@ -129,3 +129,4 @@ C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDel
 C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.SeedUsers.resources
 C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.AddAddressDataToApplicationUser.resources
 C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.ChangedVariablesInRegisterViewController.resources
+C:\Users\mveno\source\repos\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.AddedCreditCardToUser.resources

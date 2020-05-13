@@ -16,6 +16,7 @@ namespace GroceryDelivery.Models
         public string Street { get; set; }
         public int? HouseNumber { get; set; }
         public int? ApartamentNumber { get; set; }
+        public long? CreditCard { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

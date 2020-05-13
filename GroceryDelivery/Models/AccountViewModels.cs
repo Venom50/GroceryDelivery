@@ -100,6 +100,9 @@ namespace GroceryDelivery.Models
 
         [Display(Name = "Numer mieszkania")]
         public int? ApartamentNumber { get; set; }
+
+        [Display(Name = "Karta kredytowa")]
+        public long? CreditCard { get; set; }
     }
 
     public class ResetPasswordViewModel
