@@ -4,5 +4,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tutaj będzie mapa</h2>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Klucz Api: AIzaSyDsSoynwjXE_F5_NNEaxjFc4ISWWWGy6ow -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="googleMap" style="height:700px;width:100%;"></div>
+    <script>
+
+        function myMap() {
+            var myCenter = new google.maps.LatLng(51.9356691, 15.505642);
+            var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var marker = new google.maps.Marker({ position: myCenter });
+            marker.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsSoynwjXE_F5_NNEaxjFc4ISWWWGy6ow&callback=myMap"></script>
