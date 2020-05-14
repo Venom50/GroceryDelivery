@@ -41,14 +41,22 @@ namespace GroceryDelivery.Controllers
                         new DataColumn("Adress",typeof(string)),
                         new DataColumn("Latitude",typeof(string)),
                         new DataColumn("Longtitude",typeof(string))});
-                    foreach(DataRow row in dsResult.Tables["result"].Rows)
+                    try
                     {
-                        string geometry_id = dsResult.Tables["geometry"].Select("result_id = " +row["result_id"].ToString())[0]["geometry_id"].ToString();
+                        foreach (DataRow row in dsResult.Tables["result"].Rows)
+                        {
+                            string geometry_id = dsResult.Tables["geometry"].Select("result_id = " + row["result_id"].ToString())[0]["geometry_id"].ToString();
 
-                        DataRow location = dsResult.Tables["location"].Select("geometry_id = " +geometry_id)[0];
+                            DataRow location = dsResult.Tables["location"].Select("geometry_id = " + geometry_id)[0];
 
-                        dtCoordinates.Rows.Add(row["result_id"], row["formatted_address"], location["lat"], location["lng"]);
+                            dtCoordinates.Rows.Add(row["result_id"], row["formatted_address"], location["lat"], location["lng"]);
+                        }
                     }
+                    catch(NullReferenceException e)
+                    {
+                        dtCoordinates.Rows.Add(1, "Zielona Gura", "51.9356691", "15.505642");
+                    }
+                    
                     dtGMap = dtCoordinates;
                     return dtGMap;
                 }
