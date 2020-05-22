@@ -1,4 +1,5 @@
 ﻿using GroceryDelivery.Models;
+using GroceryDelivery.SQL;
 using GroceryDelivery.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace GroceryDelivery.Controllers
     public class MapController : Controller
     {
         private ApplicationDbContext _context;
+        private IShopRepository shopRepository;
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
 
         public MapController()
@@ -30,6 +32,9 @@ namespace GroceryDelivery.Controllers
                 Adress = userLocationDT.Rows[0]["Adress"].ToString(),
                 longtitude = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString()),
                 latitude = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString()),
+                //TODO Dodac repozytorium do migracji bo wywala nulla
+                //Shops = shopRepository.GetAllShops().ToList()
+                Shops = _context.ShopModels.ToList()
             };
             
             

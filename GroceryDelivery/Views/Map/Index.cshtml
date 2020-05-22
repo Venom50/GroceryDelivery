@@ -23,6 +23,10 @@
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
             var marker = new google.maps.Marker({ position: myCenter });
             marker.setMap(map);
+            @foreach(var shop in Model.Shops)
+            {
+                <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude') }).setMap(map)</text>
+            }
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsSoynwjXE_F5_NNEaxjFc4ISWWWGy6ow&callback=myMap"></script>

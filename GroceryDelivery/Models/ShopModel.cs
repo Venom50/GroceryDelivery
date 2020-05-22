@@ -16,10 +16,10 @@ namespace GroceryDelivery.Models
         public string Name { get; set; }
 
         [Required]
-        public long latidute { get; set; }
+        public float latidute { get; set; }
 
         [Required]
-        public long longtitude { get; set; }
+        public float longtitude { get; set; }
 
         [Required]
         public EShopType ShopType { get; set; }
