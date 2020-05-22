@@ -54,7 +54,7 @@ namespace GroceryDelivery.Controllers
                     }
                     catch(NullReferenceException e)
                     {
-                        dtCoordinates.Rows.Add(1, "Zielona Gura", "51.9356691", "15.505642");
+                        dtCoordinates.Rows.Add(1, "Zielona Góra", "51.9356691", "15.505642");
                     }
                     
                     dtGMap = dtCoordinates;
