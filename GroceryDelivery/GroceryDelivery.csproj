@@ -199,6 +199,10 @@
     <Compile Include="Migrations\202005131631440_AddedCreditCardToUser.Designer.cs">
       <DependentUpon>202005131631440_AddedCreditCardToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005222012406_Shop.cs" />
+    <Compile Include="Migrations\202005222012406_Shop.Designer.cs">
+      <DependentUpon>202005222012406_Shop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Enums\EShopType.cs" />
@@ -306,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005131631440_AddedCreditCardToUser.resx">
       <DependentUpon>202005131631440_AddedCreditCardToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005222012406_Shop.resx">
+      <DependentUpon>202005222012406_Shop.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
