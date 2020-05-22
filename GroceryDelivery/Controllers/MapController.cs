@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GroceryDelivery.Models;
+using GroceryDelivery.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -16,6 +18,20 @@ namespace GroceryDelivery.Controllers
         // GET: Map
         public ActionResult Index()
         {
+            DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl("Katowicka 33 Żary"));
+
+            UserLocationModel userLocation = new UserLocationModel
+            {
+                Adress = userLocationDT.Rows[0]["Adress"].ToString(),
+                longtitude = long.Parse(userLocationDT.Rows[0]["Longtitude"].ToString()),
+                latitude = long.Parse(userLocationDT.Rows[0]["Latitude"].ToString()),
+            };
+            MapViewModel mapViewModel = new MapViewModel
+            {
+                UserLocation = userLocation
+            };
+            
+            
             return View();
         }
 
