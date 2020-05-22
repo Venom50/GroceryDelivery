@@ -6,10 +6,8 @@ using System.Web;
 
 namespace GroceryDelivery.ViewModels
 {
-    public class MapViewModel
+    public class MapViewModel:UserLocationModel
     {
-
-        public UserLocationModel UserLocation { get; set; }
         public List<ShopModel> Shops { get; set; }
     }
 }

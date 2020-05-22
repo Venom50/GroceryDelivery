@@ -14,25 +14,26 @@ namespace GroceryDelivery.Controllers
 {
     public class MapController : Controller
     {
+        private ApplicationDbContext _context;
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
+
+        public MapController()
+        {
+            _context = new ApplicationDbContext();
+        }
         // GET: Map
         public ActionResult Index()
         {
             DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl("Katowicka 33 Żary"));
-
-            UserLocationModel userLocation = new UserLocationModel
-            {
-                Adress = userLocationDT.Rows[0]["Adress"].ToString(),
-                longtitude = long.Parse(userLocationDT.Rows[0]["Longtitude"].ToString()),
-                latitude = long.Parse(userLocationDT.Rows[0]["Latitude"].ToString()),
-            };
             MapViewModel mapViewModel = new MapViewModel
             {
-                UserLocation = userLocation
+                Adress = userLocationDT.Rows[0]["Adress"].ToString(),
+                longtitude = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString()),
+                latitude = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString()),
             };
             
             
-            return View();
+            return View(mapViewModel);
         }
 
         public string getRequestUrl(string address)

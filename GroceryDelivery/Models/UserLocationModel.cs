@@ -8,7 +8,7 @@ namespace GroceryDelivery.Models
     public class UserLocationModel
     {
         public string Adress { get; set; }
-        public long longtitude { get; set; }
-        public long latitude { get; set; }
+        public float longtitude { get; set; }
+        public float latitude { get; set; }
     }
 }
