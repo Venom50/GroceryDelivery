@@ -85,5 +85,25 @@ namespace GroceryDelivery.Controllers
                 
             }
         }
+
+
+        //Calculate Distance Between user location and shop location
+        public double GetDistance(float userlat, float userlong, float shoplat, float shoplong)
+        {
+            var R = 6371; //Earth Radius in Km
+            var dLat = toRadians(shoplat - userlat);
+            var dLong = toRadians(shoplong - userlong);
+            var a =
+                Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(toRadians(userlat)) * Math.Cos(toRadians(shoplat)) *
+                Math.Sin(dLong / 2) * Math.Sin(dLong / 2);
+            var c = 2* Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            var distance = R * c;//Final distance in Km
+            return distance;
+        }
+        public double toRadians(double deg)
+        {
+            return deg * (Math.PI / 180);
+        }
     }
 }
