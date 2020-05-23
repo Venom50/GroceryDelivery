@@ -17,6 +17,7 @@ namespace GroceryDelivery.Controllers
     {
         private ApplicationDbContext _context;
         private IShopRepository shopRepository;
+        private double ShopDistance = 10;//Max Distance in Km
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
 
         public MapController()
@@ -27,14 +28,17 @@ namespace GroceryDelivery.Controllers
         public ActionResult Index()
         {
             DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl("Katowicka 33 Żary"));
+            var userLong = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString());
+            var userLat = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString());
+            var shops = getNearShops(userLong, userLat, _context.ShopModels.ToList(), ShopDistance);
             MapViewModel mapViewModel = new MapViewModel
             {
                 Adress = userLocationDT.Rows[0]["Adress"].ToString(),
-                longtitude = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString()),
-                latitude = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString()),
+                longtitude = userLong,
+                latitude = userLat,
                 //TODO Dodac repozytorium do migracji bo wywala nulla
                 //Shops = shopRepository.GetAllShops().ToList()
-                Shops = _context.ShopModels.ToList()
+                Shops = shops
             };
             
             
@@ -104,6 +108,18 @@ namespace GroceryDelivery.Controllers
         public double toRadians(double deg)
         {
             return deg * (Math.PI / 180);
+        }
+        public List<ShopModel> getNearShops(float userLong, float userlat, List<ShopModel> shops, double maxDistance)
+        {
+            List<ShopModel> nearShops = new List<ShopModel>();
+            foreach(var shop in shops)
+            {
+                if (GetDistance(userlat, userLong, shop.latidute, shop.longtitude) <= maxDistance)
+                {
+                    nearShops.Add(shop);
+                }
+            }
+            return nearShops;
         }
     }
 }

@@ -17,7 +17,11 @@
     <div id="googleMap" style="height:700px;width:100%;"></div>
     <script>
         function myMap() {
-
+            var icons = {
+                lidl: {
+                    icon: 'https://banner2.cleanpng.com/20180713/uyh/kisspng-lidl-logo-retail-supermarket-toru-lidl-5b48ae1d2b0734.8496726915314898211763.jpg'
+                }
+            };
             var myCenter = new google.maps.LatLng(@Model.latitude, @Model.longtitude);
             var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
@@ -25,7 +29,7 @@
             marker.setMap(map);
             @foreach(var shop in Model.Shops)
             {
-                <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude') }).setMap(map)</text>
+                <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude'), icon: icons.lidl.icon }).setMap(map)</text>
             }
         }
     </script>

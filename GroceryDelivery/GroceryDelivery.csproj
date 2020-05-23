@@ -226,6 +226,7 @@
     <Compile Include="ViewModels\MapViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\768px-Lidl-Logo.svg.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
