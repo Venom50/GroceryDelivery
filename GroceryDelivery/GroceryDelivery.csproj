@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202005222109147_Shopv3Sorry.Designer.cs">
       <DependentUpon>202005222109147_Shopv3Sorry.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006101323405_Maciek_dzialaj.cs" />
+    <Compile Include="Migrations\202006101323405_Maciek_dzialaj.Designer.cs">
+      <DependentUpon>202006101323405_Maciek_dzialaj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Enums\EShopType.cs" />
@@ -340,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005222109147_Shopv3Sorry.resx">
       <DependentUpon>202005222109147_Shopv3Sorry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006101323405_Maciek_dzialaj.resx">
+      <DependentUpon>202006101323405_Maciek_dzialaj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
