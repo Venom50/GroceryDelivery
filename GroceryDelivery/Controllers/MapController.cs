@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GroceryDelivery.Models;
+using GroceryDelivery.SQL;
+using GroceryDelivery.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -12,11 +15,37 @@ namespace GroceryDelivery.Controllers
 {
     public class MapController : Controller
     {
+        private ApplicationDbContext _context;
+        private IShopRepository shopRepository;
+        private double ShopDistance = 10;//Max Distance in Km
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
+
+        public MapController()
+        {
+            _context = new ApplicationDbContext();
+        }
         // GET: Map
         public ActionResult Index()
         {
-            return View();
+            var user = _context.Users.SingleOrDefault(u => u.UserName == User.Identity.Name);
+            var userAddress = user.City + " " + user.Street + " " + user.HouseNumber;
+
+            DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl(userAddress));
+            var userLong = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString());
+            var userLat = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString());
+            var shops = getNearShops(userLong, userLat, _context.ShopModels.ToList(), ShopDistance);
+            MapViewModel mapViewModel = new MapViewModel
+            {
+                Adress = userLocationDT.Rows[0]["Adress"].ToString(),
+                longtitude = userLong,
+                latitude = userLat,
+                //TODO Dodac repozytorium do migracji bo wywala nulla
+                //Shops = shopRepository.GetAllShops().ToList()
+                Shops = shops
+            };
+            
+            
+            return View(mapViewModel);
         }
 
         public string getRequestUrl(string address)
@@ -54,7 +83,8 @@ namespace GroceryDelivery.Controllers
                     }
                     catch(NullReferenceException e)
                     {
-                        dtCoordinates.Rows.Add(1, "Zielona Gura", "51.9356691", "15.505642");
+                        //W razie błedu Api Zwracamy tabele z domyślną lokalizacją.
+                        dtCoordinates.Rows.Add(1, "Zielona Góra", "51.9356691", "15.505642");
                     }
                     
                     dtGMap = dtCoordinates;
@@ -63,5 +93,38 @@ namespace GroceryDelivery.Controllers
                 
             }
         }
+
+
+        //Calculate Distance Between user location and shop location
+        public double GetDistance(float userlat, float userlong, float shoplat, float shoplong)
+        {
+            var R = 6371; //Earth Radius in Km
+            var dLat = toRadians(shoplat - userlat);
+            var dLong = toRadians(shoplong - userlong);
+            var a =
+                Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(toRadians(userlat)) * Math.Cos(toRadians(shoplat)) *
+                Math.Sin(dLong / 2) * Math.Sin(dLong / 2);
+            var c = 2* Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            var distance = R * c;//Final distance in Km
+            return distance;
+        }
+        public double toRadians(double deg)
+        {
+            return deg * (Math.PI / 180);
+        }
+        public List<ShopModel> getNearShops(float userLong, float userlat, List<ShopModel> shops, double maxDistance)
+        {
+            List<ShopModel> nearShops = new List<ShopModel>();
+            foreach(var shop in shops)
+            {
+                if (GetDistance(userlat, userLong, shop.latidute, shop.longtitude) <= maxDistance)
+                {
+                    nearShops.Add(shop);
+                }
+            }
+            return nearShops;
+        }
+
     }
 }
