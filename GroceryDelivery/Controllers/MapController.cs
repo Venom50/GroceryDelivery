@@ -27,7 +27,10 @@ namespace GroceryDelivery.Controllers
         // GET: Map
         public ActionResult Index()
         {
-            DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl("Katowicka 33 Żary"));
+            var user = _context.Users.SingleOrDefault(u => u.UserName == User.Identity.Name);
+            var userAddress = user.City + " " + user.Street + " " + user.HouseNumber;
+
+            DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl(userAddress));
             var userLong = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString());
             var userLat = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString());
             var shops = getNearShops(userLong, userLat, _context.ShopModels.ToList(), ShopDistance);
@@ -80,6 +83,7 @@ namespace GroceryDelivery.Controllers
                     }
                     catch(NullReferenceException e)
                     {
+                        //W razie błedu Api Zwracamy tabele z domyślną lokalizacją.
                         dtCoordinates.Rows.Add(1, "Zielona Góra", "51.9356691", "15.505642");
                     }
                     
@@ -121,5 +125,6 @@ namespace GroceryDelivery.Controllers
             }
             return nearShops;
         }
+
     }
 }
