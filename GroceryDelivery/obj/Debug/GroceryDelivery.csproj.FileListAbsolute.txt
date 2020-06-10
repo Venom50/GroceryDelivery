@@ -266,3 +266,4 @@ C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Debu
 C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.Shopv2.resources
 C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.Shopv3Sorry.resources
 C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.Maciek_dzialaj.resources
+C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.Products.resources

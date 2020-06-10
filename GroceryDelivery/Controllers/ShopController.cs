@@ -3,6 +3,7 @@ using GroceryDelivery.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -16,7 +17,7 @@ namespace GroceryDelivery.Controllers
     public class ShopController : Controller
     {
         private ApplicationDbContext _context;
-        private double ShopDistance = 10;//Max Distance in Km
+        private double ShopDistance = 60;//Max Distance in Km
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
 
         public ShopController()
@@ -31,8 +32,8 @@ namespace GroceryDelivery.Controllers
             var userAddress = user.City + " " + user.Street + " " + user.HouseNumber;
 
             DataTable userLocationDT = GetdtLatLongStreet(getRequestUrl(userAddress));
-            var userLong = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString());
-            var userLat = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString());
+            var userLong = float.Parse(userLocationDT.Rows[0]["Longtitude"].ToString(), CultureInfo.InvariantCulture);
+            var userLat = float.Parse(userLocationDT.Rows[0]["Latitude"].ToString(), CultureInfo.InvariantCulture);
             var shops = getNearShops(userLong, userLat, _context.ShopModels.ToList(), ShopDistance);
             return View(shops);
         }

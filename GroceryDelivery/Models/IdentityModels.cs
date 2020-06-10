@@ -35,6 +35,8 @@ namespace GroceryDelivery.Models
         {
         }
         public DbSet<ShopModel> ShopModels { get; set; }
+
+        public DbSet<ProductModel> ProductModels { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

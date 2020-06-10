@@ -36,7 +36,14 @@
             var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
             var myLocation = new google.maps.Marker({ position: myCenter });
+
+            var info = new google.maps.InfoWindow({
+                content: "You are HERE!"
+            })
             myLocation.setMap(map);
+            myLocation.addListener('click', function () {
+                info.open(map, myLocation)
+            })
             @foreach (var shop in Model.Shops)
             {
                 if(shop.ShopType == GroceryDelivery.Models.Enums.EShopType.Lidl)
