@@ -220,6 +220,14 @@
     <Compile Include="Migrations\202006101533140_Products.Designer.cs">
       <DependentUpon>202006101533140_Products.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006101613060_Populate_Product_Table.cs" />
+    <Compile Include="Migrations\202006101613060_Populate_Product_Table.Designer.cs">
+      <DependentUpon>202006101613060_Populate_Product_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006101959103_Maybe_now.cs" />
+    <Compile Include="Migrations\202006101959103_Maybe_now.Designer.cs">
+      <DependentUpon>202006101959103_Maybe_now.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Enums\EShopType.cs" />
@@ -234,6 +242,7 @@
     <Compile Include="SQL\SQLShopRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ShopListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +313,7 @@
     <Content Include="Views\Manage\PaymentMethodForm.cshtml" />
     <Content Include="Views\Shop\ShopListView.cshtml" />
     <Content Include="Views\Shop\OrderView.cshtml" />
+    <Content Include="Views\Shop\SumUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +365,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006101533140_Products.resx">
       <DependentUpon>202006101533140_Products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006101613060_Populate_Product_Table.resx">
+      <DependentUpon>202006101613060_Populate_Product_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006101959103_Maybe_now.resx">
+      <DependentUpon>202006101959103_Maybe_now.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

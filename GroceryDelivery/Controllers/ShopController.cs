@@ -1,12 +1,14 @@
 ﻿using GroceryDelivery.Models;
 using GroceryDelivery.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Policy;
 using System.Text;
 using System.Web;
@@ -17,7 +19,7 @@ namespace GroceryDelivery.Controllers
     public class ShopController : Controller
     {
         private ApplicationDbContext _context;
-        private double ShopDistance = 60;//Max Distance in Km
+        private double ShopDistance = 10;//Max Distance in Km
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
 
         public ShopController()
@@ -113,6 +115,74 @@ namespace GroceryDelivery.Controllers
                 }
             }
             return nearShops;
+        }
+        [HttpGet]
+        public ActionResult OrderView(int shopId)
+        {
+            var shop = _context.ShopModels.SingleOrDefault(s => s.Id == shopId);
+            List<ProductModel> products = _context.ProductModels.Where(p => p.Shop == shop.ShopType).ToList();
+            OrderViewModel model = new OrderViewModel()
+            {
+                shop = shop,
+                products = products
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult OrderView(OrderViewModel viewModel)
+        {
+            List<double?> pola = new List<double?>();
+            ProductModel product;
+            
+            for(int i = 0;i < viewModel.products.Count(); i++)
+            {
+
+                if(viewModel.products[i].Quanity!=null)
+                //product = _context.ProductModels.SingleOrDefault(x => x.Id == viewModel.products[i].Id);
+                //produktyzviewmoelu.add(product);
+                pola.Add(viewModel.products[i].Price * viewModel.products[i].Quanity);
+            }
+               //ViewModel = Viewmodel(){
+               //VMProdukty = produktyzviewmodelu,
+               //ilosci = pola};
+                //return View("TutajWidokKoncowy", ViewModel);
+            return View("SumUp");
+        }
+
+        [HttpGet]
+        public ActionResult SumUp()
+        {
+            //tutaj bedzie bal kurwa jego mac
+            return View();
+        }
+
+        async private void SendMail()
+        {
+
+
+            try
+            {
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress("sendnotifiactionemail@gmail.com");
+                message.To.Add("dupa@gmail.com");
+
+
+                message.Subject = "Temat";
+                message.Body = "Body";
+                client.UseDefaultCredentials = false;
+                client.EnableSsl = true;
+                client.Credentials = new System.Net.NetworkCredential("sendnotifiactionemail@gmail.com", "H4$l00!qAz");
+                client.Send(message);
+                message = null;
+
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

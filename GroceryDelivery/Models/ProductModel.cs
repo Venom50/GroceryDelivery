@@ -19,5 +19,7 @@ namespace GroceryDelivery.Models
 
         [Required]
         public EShopType Shop { get; set; }
+
+        public int? Quanity { get; set; }
     }
 }

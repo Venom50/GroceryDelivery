@@ -18,7 +18,7 @@ namespace GroceryDelivery.Controllers
     {
         private ApplicationDbContext _context;
         private IShopRepository shopRepository;
-        private double ShopDistance = 60;//Max Distance in Km
+        private double ShopDistance = 10;//Max Distance in Km
         private string GoogleGeocodeAPIKey = "AIzaSyAz1BRGW3DxpKbmSKAXe5hMKici_1VUvAQ";
 
         public MapController()
