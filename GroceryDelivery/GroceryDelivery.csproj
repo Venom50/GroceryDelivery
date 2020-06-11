@@ -242,6 +242,7 @@
     <Compile Include="SQL\SQLShopRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
+    <Compile Include="ViewModels\OrderPriceViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ShopListViewModel.cs" />
   </ItemGroup>

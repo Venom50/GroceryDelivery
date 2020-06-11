@@ -132,57 +132,79 @@ namespace GroceryDelivery.Controllers
         public ActionResult OrderView(OrderViewModel viewModel)
         {
             List<double?> pola = new List<double?>();
+            List<ProductModel> products = new List<ProductModel>();
             ProductModel product;
+
+            var user = _context.Users.SingleOrDefault(u => u.UserName == User.Identity.Name);
             
-            for(int i = 0;i < viewModel.products.Count(); i++)
+            for(int i = 0; i < viewModel.products.Count(); i++)
             {
 
                 if(viewModel.products[i].Quanity!=null)
-                //product = _context.ProductModels.SingleOrDefault(x => x.Id == viewModel.products[i].Id);
-                //produktyzviewmoelu.add(product);
-                pola.Add(viewModel.products[i].Price * viewModel.products[i].Quanity);
+                {
+                    var id = viewModel.products[i].Id;
+
+                    product = _context.ProductModels.SingleOrDefault(x => x.Id == id);
+                    product.Quanity = viewModel.products[i].Quanity;
+                    products.Add(product);
+                    pola.Add(viewModel.products[i].Price * viewModel.products[i].Quanity);
+                }        
             }
-               //ViewModel = Viewmodel(){
-               //VMProdukty = produktyzviewmodelu,
-               //ilosci = pola};
-                //return View("TutajWidokKoncowy", ViewModel);
-            return View("SumUp");
+
+            OrderPriceViewModel orderPrice = new OrderPriceViewModel()
+            {
+                products = products,
+                priceOrder = pola
+            };
+
+            string recept = "";
+            double sum = 0;
+
+            for(int i = 0; i < orderPrice.products.Count(); i++)
+            {
+                recept += "[Nazwa: " + orderPrice.products[i].Name + "; Cena: " + orderPrice.products[i].Price.ToString()
+                    + "zł; Ilość: " + orderPrice.products[i].Quanity.ToString() + "; Łączna cena: " + orderPrice.priceOrder[i].Value.ToString() + "zł], ";
+
+                sum += orderPrice.priceOrder[i].Value;
+            }
+
+            SendMail(user, recept, sum);
+               
+            return View("SumUp", orderPrice);
         }
 
         [HttpGet]
         public ActionResult SumUp()
         {
-            //tutaj bedzie bal kurwa jego mac
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
-        async private void SendMail()
+        private void SendMail(ApplicationUser user, string recept, double sum)
         {
+            NetworkCredential login;
+            SmtpClient smtpClient;
+            MailMessage message;
 
+            //Ze względu na wymagane podanie hasła zostawiam dane poniżej puste
+            login = new NetworkCredential("", "");
 
-            try
-            {
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress("sendnotifiactionemail@gmail.com");
-                message.To.Add("dupa@gmail.com");
+            smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.Port = Convert.ToInt32("587");
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = login;
 
+            //Tutaj tak samo
+            message = new MailMessage { From = new MailAddress("", "GroceryDelivery", Encoding.UTF8) };
+            message.To.Add(new MailAddress(user.Email));
 
-                message.Subject = "Temat";
-                message.Body = "Body";
-                client.UseDefaultCredentials = false;
-                client.EnableSsl = true;
-                client.Credentials = new System.Net.NetworkCredential("sendnotifiactionemail@gmail.com", "H4$l00!qAz");
-                client.Send(message);
-                message = null;
+            message.Subject = "Rachunek";
+            message.Body = recept + "[[[SUMA: " + sum + "zł]]]";
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            message.Priority = MailPriority.Normal;
+            message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
-
-            }
-
-            catch (Exception ex)
-            {
-
-            }
+            smtpClient.Send(message);
         }
     }
 }

@@ -24,12 +24,13 @@
                     <td>@Html.ValueFor(x => Model.products[i].Id)
                     @Html.TextBoxFor(x => Model.products[i].Id, new { @readonly = "true", style = "display: none" }) </td>
                     <td>@Model.products[i].Name </td>
-                    <td>@Html.ValueFor(x => Model.products[i].Price)</td>
+                    <td>@Html.ValueFor(x => Model.products[i].Price)
+                    @Html.TextBoxFor(x => Model.products[i].Price, new { @readonly = "true", style = "display: none" })</td>
                     <td>@Html.TextBoxFor(x => Model.products[i].Quanity)</td>
                 </tr>
             }
         </table>
-        <input type="submit" class="btn btn-primary" value="PLZ"/>
+        <input type="submit" class="btn btn-primary" value="Zapłać"/>
     }
 
 </div>
