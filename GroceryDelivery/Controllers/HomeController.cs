@@ -27,9 +27,5 @@ namespace GroceryDelivery.Controllers
 
             return View();
         }
-        public ActionResult ShopListView()
-        {
-            return View();
-        }
     }
 }
