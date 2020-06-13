@@ -1,0 +1,27 @@
+﻿@model IEnumerable<GroceryDelivery.Models.ShopModel>
+
+@{
+    ViewBag.Title = "ShopListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SumUp", "Shop", FormMethod.Post))
+{
+    <div>
+            @foreach (var item in Model)
+            {
+                <p></p>
+                <div class="p-3 mb-2 bg-dark text-white rounded">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@item.Name</h5>
+                        </div>
+                        <div>
+                            <small class="text-muted"><strong>Sklep: @item.ShopType.ToString()</strong>,</small>
+                        </div>
+                        @Html.ActionLink("Order From Here", "OrderView", "Shop", new { shopId = item.Id }, new { @class = "btn btn-primary" })
+
+                    </a>
+                </div>
+            }
+    </div>
+}

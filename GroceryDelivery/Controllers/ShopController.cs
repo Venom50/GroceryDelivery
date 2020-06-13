@@ -186,7 +186,7 @@ namespace GroceryDelivery.Controllers
             MailMessage message;
 
             //Ze względu na wymagane podanie hasła zostawiam dane poniżej puste
-            login = new NetworkCredential("", "");
+            login = new NetworkCredential("grocerydeliveryreceiptbot", "zaq1@WSX");
 
             smtpClient = new SmtpClient("smtp.gmail.com");
             smtpClient.Port = Convert.ToInt32("587");
@@ -194,7 +194,7 @@ namespace GroceryDelivery.Controllers
             smtpClient.Credentials = login;
 
             //Tutaj tak samo
-            message = new MailMessage { From = new MailAddress("", "GroceryDelivery", Encoding.UTF8) };
+            message = new MailMessage { From = new MailAddress("grocerydeliveryreceiptbot@gmail.com", "GroceryDelivery", Encoding.UTF8) };
             message.To.Add(new MailAddress(user.Email));
 
             message.Subject = "Rachunek";

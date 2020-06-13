@@ -1,0 +1,73 @@
+﻿@model GroceryDelivery.ViewModels.MapViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Klucz Api: AIzaSyDsSoynwjXE_F5_NNEaxjFc4ISWWWGy6ow -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="googleMap" style="height:700px;width:100%;"></div>
+    <script>
+        function myMap() {
+            var icons = {
+                lidl: {
+                    icon: "/Content/Mapa/location_lidl.png"
+                },
+                biedronka: {
+                    icon: "/Content/Mapa/location_biedronka.png"
+                },
+                netto: {
+                    icon: "/Content/Mapa/location_netto.png"
+                },
+                tesco: {
+                    icon: "/Content/Mapa/location_tesco.png"
+                }
+
+            };
+            var myCenter = new google.maps.LatLng(@Model.latitude, @Model.longtitude);
+            var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var myLocation = new google.maps.Marker({ position: myCenter });
+
+            var info = new google.maps.InfoWindow({
+                content: "You are HERE!"
+            })
+            myLocation.setMap(map);
+            myLocation.addListener('click', function () {
+                info.open(map, myLocation)
+            })
+            @foreach (var shop in Model.Shops)
+            {
+                if(shop.ShopType == GroceryDelivery.Models.Enums.EShopType.Lidl)
+                {
+                   <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude'), icon: icons.lidl.icon }).setMap(map)</text>
+
+                }
+                if(shop.ShopType == GroceryDelivery.Models.Enums.EShopType.Biedronka)
+                {
+                   <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude'), icon: icons.biedronka.icon }).setMap(map)</text>
+                }
+                if(shop.ShopType == GroceryDelivery.Models.Enums.EShopType.Netto)
+                {
+                   <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude'), icon: icons.netto.icon }).setMap(map)</text>
+                }
+                if(shop.ShopType == GroceryDelivery.Models.Enums.EShopType.Tesco)
+                {
+                   <text>new google.maps.Marker({ position: new google.maps.LatLng('@shop.latidute', '@shop.longtitude'), icon: icons.tesco.icon }).setMap(map)</text>
+                }
+
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsSoynwjXE_F5_NNEaxjFc4ISWWWGy6ow&callback=myMap"></script>
+    <div class="row">
+        <input type="button" title="GoToShops" value="Go To Shops" class="btn btn-primary" onclick="location.href='@Url.Action("ShopListView","Shop")'"/>
+    </div>

@@ -1,0 +1,41 @@
+﻿@model GroceryDelivery.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "OrderView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.shop.Name</h2>
+<div>
+    @using (Html.BeginForm("OrderView", "Shop", FormMethod.Post))
+    {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa</th>
+                    <th>Cena</th>
+                    <th>Ilość</th>
+                </tr>
+            </thead>
+            @for (int i = 0; i < Model.products.Count(); i++)
+            {
+                <tr>
+                    <td>@Html.ValueFor(x => Model.products[i].Id)
+                    @Html.TextBoxFor(x => Model.products[i].Id, new { @readonly = "true", style = "display: none" }) </td>
+                    <td>@Model.products[i].Name </td>
+                    <td>@Html.ValueFor(x => Model.products[i].Price)
+                    @Html.TextBoxFor(x => Model.products[i].Price, new { @readonly = "true", style = "display: none" })</td>
+                    <td>@Html.TextBoxFor(x => Model.products[i].Quanity)</td>
+                </tr>
+            }
+        </table>
+        <input type="submit" class="btn btn-primary" value="Zapłać"/>
+    }
+
+</div>
+@section scripts{
+
+}
+
+

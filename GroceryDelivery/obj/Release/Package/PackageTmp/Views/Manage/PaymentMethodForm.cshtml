@@ -1,0 +1,22 @@
+﻿@model GroceryDelivery.Models.RegisterViewModel
+@{
+    ViewBag.Title = "PaymentMethodForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dodaj kartę kredytową</h2>
+
+@using (Html.BeginForm("AddPaymentMethod", "Manage"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.CreditCard)
+        @Html.TextBoxFor(m => m.CreditCard, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CreditCard)
+    </div>
+    @Html.AntiForgeryToken();
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
