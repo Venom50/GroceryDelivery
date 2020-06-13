@@ -138,3 +138,4 @@ C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Rele
 C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Release\GroceryDelivery.csproj.CopyComplete
 C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Release\GroceryDelivery.dll
 C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Release\GroceryDelivery.pdb
+C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Release\GroceryDelivery.Migrations.ShopsPoppulate.resources

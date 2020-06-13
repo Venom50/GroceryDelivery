@@ -232,6 +232,10 @@
     <Compile Include="Migrations\202006131246020_MoreProducts.Designer.cs">
       <DependentUpon>202006131246020_MoreProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006131452455_ShopsPoppulate.cs" />
+    <Compile Include="Migrations\202006131452455_ShopsPoppulate.Designer.cs">
+      <DependentUpon>202006131452455_ShopsPoppulate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Enums\EShopType.cs" />
@@ -380,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006131246020_MoreProducts.resx">
       <DependentUpon>202006131246020_MoreProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006131452455_ShopsPoppulate.resx">
+      <DependentUpon>202006131452455_ShopsPoppulate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
