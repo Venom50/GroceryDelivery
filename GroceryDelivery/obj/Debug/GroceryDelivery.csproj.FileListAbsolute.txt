@@ -408,3 +408,4 @@ C:\Users\mveno\OneDrive\Pulpit\Grocery3\GroceryDelivery\GroceryDelivery\obj\Debu
 C:\Users\mveno\OneDrive\Pulpit\Grocery3\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.csproj.CopyComplete
 C:\Users\mveno\OneDrive\Pulpit\Grocery3\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.dll
 C:\Users\mveno\OneDrive\Pulpit\Grocery3\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.pdb
+C:\Users\SiarXx\Desktop\GroceryDelivery\GroceryDelivery\GroceryDelivery\obj\Debug\GroceryDelivery.Migrations.MoreProducts.resources
